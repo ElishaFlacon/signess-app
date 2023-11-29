@@ -22,7 +22,7 @@ class Comands():
 
         try:
             ModelService.load(self.network, path)
-            self.label_model.config(
+            self.label_model.configure(
                 text="Модель готова",
                 foreground="lime"
             )
@@ -46,14 +46,14 @@ class Comands():
 
         def train():
             ModelService.train(self.network, self.dataset, 3)
-            self.label_model.config(
+            self.label_model.configure(
                 text="Модель готова",
                 foreground="lime"
             )
             show_info("Модель обучена!")
 
         try:
-            self.label_model.config(
+            self.label_model.configure(
                 text="Модель обучается...",
                 foreground="orange"
             )
@@ -62,7 +62,7 @@ class Comands():
             th_train.start()
 
         except:
-            self.label_model.config(
+            self.label_model.configure(
                 text="Нет обученной модели",
                 foreground="red"
             )
@@ -82,7 +82,7 @@ class Comands():
             dataset = DatasetService.load(self.network, path)
             self.path_to_dataset = path
             self.dataset = dataset
-            self.label_dataset.config(
+            self.label_dataset.configure(
                 text="Датасет загружен",
                 foreground="lime"
             )
@@ -104,7 +104,7 @@ class Comands():
             )
             self.path_to_dataset = path
             self.dataset = dataset
-            self.label_dataset.config(
+            self.label_dataset.configure(
                 text="Датасет загружен",
                 foreground="lime"
             )
