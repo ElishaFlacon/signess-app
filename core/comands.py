@@ -1,3 +1,4 @@
+from threading import Thread
 import tkinter.filedialog as tkFile
 from core.service.model import ModelService
 from core.service.dataset import DatasetService
@@ -21,6 +22,10 @@ class Comands():
 
         try:
             ModelService.load(self.network, path)
+            self.label_model.config(
+                text="Модель готова",
+                foreground="lime"
+            )
         except:
             show_error()
 
@@ -39,10 +44,28 @@ class Comands():
         if not check_dataset(self.dataset):
             return
 
-        try:
+        def train():
             ModelService.train(self.network, self.dataset, 3)
+            self.label_model.config(
+                text="Модель готова",
+                foreground="lime"
+            )
             show_info("Модель обучена!")
+
+        try:
+            self.label_model.config(
+                text="Модель обучается...",
+                foreground="orange"
+            )
+
+            th_train = Thread(target=train)
+            th_train.start()
+
         except:
+            self.label_model.config(
+                text="Нет обученной модели",
+                foreground="red"
+            )
             show_error()
 
     def load_dataset(self):
@@ -59,6 +82,10 @@ class Comands():
             dataset = DatasetService.load(self.network, path)
             self.path_to_dataset = path
             self.dataset = dataset
+            self.label_dataset.config(
+                text="Датасет загружен",
+                foreground="lime"
+            )
             show_info("Датасет загружен!")
         except:
             show_error()
@@ -77,6 +104,10 @@ class Comands():
             )
             self.path_to_dataset = path
             self.dataset = dataset
+            self.label_dataset.config(
+                text="Датасет загружен",
+                foreground="lime"
+            )
             show_info("Датасет загружен!")
         except:
             show_error()
