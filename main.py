@@ -1,6 +1,5 @@
 import sv_ttk
 import tkinter as tk
-
 from config import Config
 from core.comands import Comands
 from core.components import Components
