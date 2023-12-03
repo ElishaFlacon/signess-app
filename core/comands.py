@@ -18,7 +18,7 @@ class Comands():
 
     def load_model(self):
         show_info(
-            "Загрузка модели будет работать при условии, что версия Fedot >= 0.7.3"
+            "Загрузка модели работает только с версией Fedot >= 0.7.3"
         )
 
         path = tkFile.askdirectory()
@@ -177,6 +177,11 @@ class Comands():
                 self.path_to_dataset,
                 path
             )
-            show_info(str(classify))
+
+            result = ""
+            for item in classify:
+                result += f"{item[0][0]}: {item[1]*100}% \n"
+
+            show_info(result)
         except:
             show_error()
