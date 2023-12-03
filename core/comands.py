@@ -49,7 +49,7 @@ class Comands():
             return
 
         def train():
-            ModelService.train(self.network, self.dataset, 3)
+            ModelService.train(self.network, self.dataset, self.epochs_count)
             self.label_model.configure(
                 text="Модель готова",
                 foreground="lime"
@@ -185,3 +185,24 @@ class Comands():
             show_info(result)
         except:
             show_error()
+
+    def epochs(self):
+        new_epochs_count = self.entry_epochs.get()
+        self.entry_epochs.delete(0, 9999)
+
+        try:
+            new_epochs_count = int(new_epochs_count)
+        except ValueError:
+            show_error("Нужно ввести число!")
+            return
+
+        new_epochs_count = abs(new_epochs_count)
+
+        if (new_epochs_count == 0):
+            new_epochs_count = 1
+
+        self.label_epochs.configure(
+            text=f"Количество эпох: {new_epochs_count}"
+        )
+
+        self.epochs_count = new_epochs_count
