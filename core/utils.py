@@ -20,6 +20,13 @@ def check_dataset(dataset):
     show_error("Нет датасета!")
 
 
+# оставлю так, вряд-ли пригодится
+# def check_model_training(network):
+#     if network.is_fitted:
+#         return True
+#     show_error("Модель не обучена!")
+
+
 def show_error(message="Произошла критическая ошибка!"):
     tkMb.showerror("Ошибка!", message)
 
