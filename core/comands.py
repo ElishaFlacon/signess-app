@@ -182,6 +182,9 @@ class Comands():
             for item in classify:
                 result += f"{item[0][0]}: {item[1]*100}% \n"
 
+            person = f"{classify[0][0][0]}: {classify[0][1]*100}%"
+            self.label_result.configure(text=person)
+
             show_info(result)
         except:
             show_error()
