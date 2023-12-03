@@ -130,20 +130,27 @@ class Comands():
         if not check_path(path):
             return
 
-        try:
-            dataset = DatasetService.generate(
-                self.network,
+        def generate():
+            path_to_dataset = DatasetService.generate(
                 path,
                 self.autograph,
                 self.document
             )
-            self.path_to_dataset = path
+            self.path_to_dataset = path_to_dataset
+
+            dataset = DatasetService.load(self.network, path_to_dataset)
             self.dataset = dataset
+
             self.label_dataset.configure(
                 text="Датасет загружен",
                 foreground="lime"
             )
             show_info("Датасет загружен!")
+
+        try:
+            thread = Thread(target=generate)
+            thread.start()
+            show_info("Датасет генерируется...")
         except:
             show_error()
 

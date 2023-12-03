@@ -6,7 +6,6 @@ class DatasetService():
         dataset = network.load_dataset(path)
         return dataset
 
-    def generate(network, path, autograph, document):
+    def generate(path, autograph, document):
         path_to_dataset = create_dataset(path, autograph, document)
-        dataset = DatasetService.load(network, path_to_dataset)
-        return dataset
+        return path_to_dataset
