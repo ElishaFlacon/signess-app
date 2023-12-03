@@ -31,6 +31,17 @@ class Components():
             command=self.train_model,
         )
 
+        self.btn_train_blunt = ttk.Button(
+            master=root,
+            text="Сбросить обучение",
+            command=self.blunt_model,
+        )
+
+        self.btn_accuracy = ttk.Button(
+            master=root,
+            text="Проверить точность",
+            command=self.accuracy_model,
+        )
         self.btn_generate_dataset = ttk.Button(
             master=root,
             text="Создать датасет",
@@ -58,20 +69,25 @@ class Components():
 
         self.label_model = ttk.Label(
             master=root,
-            text="Нет обученной модели",
+            text="Модель не обучена",
             foreground="red",
             anchor="center"
         )
 
+        self.entry_epochs = ttk.Entry(master=root)
+
     def __render_components(self):
-        self.btn_load_dataset.place(x=30, y=30, width=150, height=40)
-        self.btn_generate_dataset.place(x=30, y=80, width=150, height=40)
+        self.btn_load_dataset.place(x=30, y=30, width=200, height=40)
+        self.btn_generate_dataset.place(x=30, y=80, width=200, height=40)
+        self.btn_accuracy.place(x=30, y=130, width=200, height=40)
 
-        self.btn_load_model.place(x=190, y=30, width=150, height=40)
-        self.btn_save_model.place(x=190, y=80, width=150, height=40)
+        self.btn_load_model.place(x=240, y=30, width=200, height=40)
+        self.btn_save_model.place(x=240, y=80, width=200, height=40)
+        self.btn_train_blunt.place(x=240, y=130, width=200, height=40)
 
-        self.btn_train_model.place(x=30, y=130, width=310, height=40)
-        self.btn_classification.place(x=30, y=180, width=310, height=40)
+        self.btn_train_model.place(x=30, y=180, width=410, height=40)
+        self.btn_classification.place(x=30, y=230, width=410, height=40)
 
-        self.label_dataset.place(x=350, y=30, width=230, height=40)
-        self.label_model.place(x=350, y=80, width=230, height=40)
+        self.label_dataset.place(x=450, y=30, width=210, height=40)
+        self.label_model.place(x=450, y=80, width=210, height=40)
+        self.entry_epochs.place(x=450, y=130, width=210, height=40)
