@@ -74,7 +74,25 @@ class Components():
             anchor="center"
         )
 
+        self.label_epochs = ttk.Label(
+            master=root,
+            font=('Helvetica', 8),
+            text="Количество эпох: 5",
+            foreground="white",
+            anchor="center",
+        )
         self.entry_epochs = ttk.Entry(master=root)
+        self.btn_apply_epochs = ttk.Button(
+            master=root,
+            text="Применить",
+            command=self.epochs,
+        )
+
+        self.label_result = ttk.Label(
+            master=root,
+            text="...",
+            foreground="white"
+        )
 
     def __render_components(self):
         self.btn_load_dataset.place(x=30, y=30, width=200, height=40)
@@ -90,4 +108,9 @@ class Components():
 
         self.label_dataset.place(x=450, y=30, width=210, height=40)
         self.label_model.place(x=450, y=80, width=210, height=40)
-        self.entry_epochs.place(x=450, y=130, width=210, height=40)
+
+        self.label_epochs.place(x=450, y=160, width=210, height=20)
+        self.entry_epochs.place(x=450, y=180, width=80, height=40)
+        self.btn_apply_epochs.place(x=540, y=180, width=120, height=40)
+
+        self.label_result.place(x=30, y=280, width=620, height=40)
