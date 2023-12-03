@@ -6,8 +6,8 @@ from inskrib.documents import Document
 
 title = "EZ APP"
 
-width = 600
-height = 337
+width = 680
+height = 300
 
 autograph = Autograph(size=(380, 380))
 document = Document()
