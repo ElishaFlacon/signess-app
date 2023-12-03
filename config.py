@@ -7,7 +7,7 @@ from inskrib.documents import Document
 title = "EZ APP"
 
 width = 680
-height = 300
+height = 350
 
 autograph = Autograph(size=(380, 380))
 document = Document()
@@ -22,6 +22,8 @@ class Config():
         self.network = network
         self.dataset = None
         self.path_to_dataset = None
+
+        self.epochs_count = 5
 
         root.title(title)
         screenwidth = root.winfo_screenwidth()
