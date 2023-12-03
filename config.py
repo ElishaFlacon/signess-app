@@ -4,7 +4,7 @@ from inskrib.autograph import Autograph
 from inskrib.documents import Document
 
 
-title = "EZ APP"
+title = "Signess App"
 
 width = 680
 height = 350
