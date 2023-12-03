@@ -1,3 +1,4 @@
+import fitz
 from threading import Thread
 import tkinter.filedialog as tkFile
 from core.service.model import ModelService
@@ -16,6 +17,10 @@ class Comands():
     """
 
     def load_model(self):
+        show_info(
+            "Загрузка модели будет работать при условии, что версия Fedot >= 0.7.3"
+        )
+
         path = tkFile.askdirectory()
         if not check_path(path):
             return
@@ -39,7 +44,6 @@ class Comands():
         except:
             show_error()
 
-    # TODO ЭПОХИ
     def train_model(self):
         if not check_dataset(self.dataset):
             return
@@ -58,14 +62,45 @@ class Comands():
                 foreground="orange"
             )
 
-            th_train = Thread(target=train)
-            th_train.start()
-
+            thread = Thread(target=train)
+            thread.start()
         except:
             self.label_model.configure(
-                text="Нет обученной модели",
+                text="Модель не обучена",
                 foreground="red"
             )
+            show_error()
+
+    def blunt_model(self):
+        try:
+            ModelService.blunt(self.network)
+            self.label_model.configure(
+                text="Модель не обучена",
+                foreground="red"
+            )
+            show_info("Модель сбросила обучение!")
+        except:
+            show_error()
+
+    def accuracy_model(self):
+        filetypes = (("Датасет", "*.npz"),)
+        path = tkFile.askopenfilename(
+            title="Загрузка npz датасета",
+            filetypes=filetypes
+        )
+
+        if not check_path(path):
+            return
+
+        def accuracy():
+            dataset = DatasetService.load(self.network, path)
+            roc_auc = ModelService.accuracy(self.network, dataset)
+            show_info(f"Точность модели (rog auc): {roc_auc * 100}%")
+
+        try:
+            thread = Thread(target=accuracy)
+            thread.start()
+        except:
             show_error()
 
     def load_dataset(self):
@@ -118,7 +153,7 @@ class Comands():
         if not check_dataset(self.path_to_dataset):
             return
 
-        filetypes = (("Изображение", "*.png *.jpg *.jpeg *.pdf"),)
+        filetypes = (("Файл", "*.png *.jpg *.jpeg *.bmp *.pdf"),)
         path = tkFile.askopenfilename(
             title="Открыть файл",
             filetypes=filetypes
@@ -127,12 +162,13 @@ class Comands():
         if not check_path(path):
             return
 
-        # filetype = path.split('.')[-1]
-        # if(filetype == "pdf"):
-        #     with fitz.open(path) as pdf:
-        #         page = pdf.load_page(0)
-        #         pix = page.get_pixmap()
-        #         pix.save(path)
+        filetype = path.split('.')[-1]
+        if (filetype == "pdf"):
+            with fitz.open(path) as pdf:
+                path = "./temp.png"
+                page = pdf.load_page(0)
+                pix = page.get_pixmap()
+                pix.save(path)
 
         try:
             classify = ClassificationService.classificate(
