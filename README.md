@@ -49,7 +49,7 @@
  📺 Демо:
 </h2>
 
-- Пример (тут будет видос)
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/dB6m8zw6NW0/0.jpg)](https://www.youtube.com/watch?v=dB6m8zw6NW0)
 
 
 
