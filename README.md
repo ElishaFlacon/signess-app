@@ -49,10 +49,10 @@
  📺 Демо:
 </h2>
 
-[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/dB6m8zw6NW0/0.jpg)](https://www.youtube.com/watch?v=dB6m8zw6NW0)
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/dB6m8zw6NW0/0.jpg)](https://www.youtube.com/watch?v=Fbkw7g7WmiM)
 
 - на 4:30 я сказал, что для загруженной модели будет долго происходить обучение - это не так, при загрузке модли ей не нужно обучаться, оговорился))
-
+- <a href="https://www.youtube.com/watch?v=dB6m8zw6NW0">ускоренное видео</a>
 
 </br>
 
