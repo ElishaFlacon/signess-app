@@ -1,6 +1,6 @@
 import os
 import cv2
-import csv
+from core.utils import csv_to_array
 
 
 class ClassificationService():
@@ -13,17 +13,13 @@ class ClassificationService():
         classify = network.classify(temp_path, path_to_dataset)
         os.remove(temp_path)
 
-        csv_result = []
-        with open(path_to_csv) as csvfile:
-            reader = csv.reader(csvfile)
-            for row in reader:
-                csv_result.append(row)
+        persons = csv_to_array(path_to_csv)
 
         def sort(item):
             return item[1]
 
         result = sorted(
-            zip(csv_result, classify[0]),
+            zip(persons, classify[0]),
             key=sort,
             reverse=True
         )[:3]
