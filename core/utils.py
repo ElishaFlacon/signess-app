@@ -1,3 +1,4 @@
+import csv
 import tkinter.messagebox as tkMb
 from signess.dataset import Dataset
 
@@ -25,6 +26,16 @@ def check_dataset(dataset):
 #     if network.is_fitted:
 #         return True
 #     show_error("Модель не обучена!")
+
+
+def csv_to_array(path_to_csv: str):
+    csv_result = []
+    with open(path_to_csv) as csvfile:
+        reader = csv.reader(csvfile)
+        for row in reader:
+            csv_result.append(row)
+
+    return csv_result
 
 
 def show_error(message="Произошла критическая ошибка!"):
