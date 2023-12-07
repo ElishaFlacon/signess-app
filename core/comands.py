@@ -94,8 +94,11 @@ class Comands():
 
         def accuracy():
             dataset = DatasetService.load(self.network, path)
-            roc_auc = ModelService.accuracy(self.network, dataset)
-            show_info(f"Точность модели (rog auc): {roc_auc * 100}%")
+            (roc_auc, files_count, drop_count) = ModelService.accuracy(
+                self.network, dataset)
+            show_info(
+                f"Точность модели (rog auc): {(roc_auc * 100):.3f}%\n\nКоличество ошибочных предсказаний {drop_count} из {files_count}"
+            )
 
         try:
             thread = Thread(target=accuracy)
