@@ -97,7 +97,7 @@ class Comands():
             (roc_auc, files_count, drop_count) = ModelService.accuracy(
                 self.network, dataset)
             show_info(
-                f"Точность модели (rog auc): {(roc_auc * 100):.3f}%\n\nКоличество ошибочных предсказаний {drop_count} из {files_count}"
+                f"Точность модели (rog auc): {(roc_auc * 100):.3f}%\n\nКоличество ошибочных распознавания {drop_count} из {files_count}"
             )
 
         try:
