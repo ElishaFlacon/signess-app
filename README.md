@@ -35,6 +35,11 @@
 - `<venv_name>/Scripts/activate` (windows) или `source <venv_name>/Scripts/activate` (linux)
 - `pip install -r ./requirements.txt`
 
+
+https://github.com/ElishaFlacon/signess-app/assets/83610362/c4b1e82a-be8c-4682-8687-a568508a8dd1
+
+
+
 <h3>
     Запускаем, не работет, ура! 🗿🚬
 </h3>
