@@ -30,7 +30,7 @@
 </h2>
     
 - `git clone https://github.com/ElishaFlacon/signess-app.git`
-- `cd cigness-app`
+- `cd signess-app`
 - `python -m venv <venv_name>`
 - `<venv_name>/Scripts/activate` (windows) или `source <venv_name>/Scripts/activate` (linux)
 - `pip install -r ./requirements.txt`
