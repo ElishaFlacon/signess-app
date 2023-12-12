@@ -54,10 +54,7 @@ https://github.com/ElishaFlacon/signess-app/assets/83610362/c4b1e82a-be8c-4682-8
  📺 Демо:
 </h2>
 
-[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/dB6m8zw6NW0/0.jpg)](https://www.youtube.com/watch?v=Fbkw7g7WmiM)
-
-- на 9:00 (4:30 на ускоренном видео) я сказал, что для загруженной модели будет долго происходить обучение - это не так, при загрузке модли ей не нужно обучаться, оговорился))
-- <a href="https://www.youtube.com/watch?v=dB6m8zw6NW0">ускоренное видео</a>
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/4LAVme2N4SU/0.jpg)](https://www.youtube.com/watch?v=4LAVme2N4SU)
 
 </br>
 
