@@ -16,7 +16,7 @@ class ModelService():
     def blunt(network):
         network.blunt()
 
-    def accuracy(network, dataset):
+    def metrics(network, dataset):
         predicts = network.predict(dataset)
         predicts_list = predicts.predict.tolist()
 
@@ -91,6 +91,8 @@ class ModelService():
             recall,
             confusion_matrix,
             roc_auc_curve,
+            fpr,
+            tpr,
             files_count,
             drop_count,
             labels

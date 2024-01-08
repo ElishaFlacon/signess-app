@@ -40,7 +40,7 @@ class Components():
         self.btn_accuracy = ttk.Button(
             master=root,
             text="Метрики модели",
-            command=self.accuracy_model,
+            command=self.metrics_model,
         )
         self.btn_generate_dataset = ttk.Button(
             master=root,
