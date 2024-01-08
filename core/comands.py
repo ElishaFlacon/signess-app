@@ -1,3 +1,4 @@
+import time
 import fitz
 from threading import Thread
 import tkinter.filedialog as tkFile
@@ -49,12 +50,13 @@ class Comands():
             return
 
         def train():
+            start_time = time.time()
             ModelService.train(self.network, self.dataset, self.epochs_count)
             self.label_model.configure(
-                text="Модель готова",
+                text=f"Модель готова",
                 foreground="lime"
             )
-            show_info("Модель обучена!")
+            show_info(f"Модель обучена!\nВремя обучения модели {time.time() - start_time:.3f} секунд")
 
         try:
             self.label_model.configure(
@@ -97,7 +99,7 @@ class Comands():
             (roc_auc, files_count, drop_count) = ModelService.accuracy(
                 self.network, dataset)
             show_info(
-                f"Точность модели (rog auc): {(roc_auc * 100):.3f}%\n\nКоличество ошибочных распознавания {drop_count} из {files_count}"
+                f"ROG AUC модели: {(roc_auc * 100):.3f}%\n\nКоличество ошибочных распознавания {drop_count} из {files_count}"
             )
 
         try:
