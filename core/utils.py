@@ -1,5 +1,6 @@
 import csv
 import tkinter.messagebox as tkMb
+from matplotlib import pyplot as plt
 from signess.dataset import Dataset
 
 
@@ -44,3 +45,20 @@ def show_error(message="Произошла критическая ошибка!"
 
 def show_info(message="Отлично!"):
     tkMb.showinfo("Информация", message)
+
+
+def roc_auc_plot(fpr, tpr, roc_auc):
+    plt.plot(
+        fpr,
+        tpr,
+        color='darkorange',
+        label=f'ROC кривая (area = {roc_auc:.2f})'
+    )
+    plt.plot([0, 1], [0, 1], color='navy', linestyle='--')
+    plt.xlim([0.0, 1.0])
+    plt.ylim([0.0, 1.05])
+    plt.xlabel('False Positive Rate')
+    plt.ylabel('True Positive Rate')
+    plt.title('Пример ROC-кривой')
+    plt.legend(loc="lower right")
+    plt.show()
