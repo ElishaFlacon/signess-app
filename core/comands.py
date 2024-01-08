@@ -5,7 +5,7 @@ import tkinter.filedialog as tkFile
 from core.service.model import ModelService
 from core.service.dataset import DatasetService
 from core.service.classification import ClassificationService
-from core.utils import show_info, show_error, check_path, check_dataset
+from core.utils import show_info, show_error, check_path, check_dataset, roc_auc_plot, confusion_matrix_plot
 
 
 class Comands():
@@ -49,14 +49,15 @@ class Comands():
         if not check_dataset(self.dataset):
             return
 
-        def train():
+        def thread_func():
             start_time = time.time()
             ModelService.train(self.network, self.dataset, self.epochs_count)
             self.label_model.configure(
                 text=f"Модель готова",
                 foreground="lime"
             )
-            show_info(f"Модель обучена!\nВремя обучения модели {time.time() - start_time:.3f} секунд")
+            show_info(
+                f"Модель обучена!\nВремя обучения модели {time.time() - start_time:.3f} секунд")
 
         try:
             self.label_model.configure(
@@ -64,7 +65,7 @@ class Comands():
                 foreground="orange"
             )
 
-            thread = Thread(target=train)
+            thread = Thread(target=thread_func)
             thread.start()
         except:
             self.label_model.configure(
@@ -84,7 +85,7 @@ class Comands():
         except:
             show_error()
 
-    def accuracy_model(self):
+    def metrics_model(self):
         filetypes = (("Датасет", "*.npz"),)
         path = tkFile.askopenfilename(
             title="Загрузка npz датасета",
@@ -94,16 +95,31 @@ class Comands():
         if not check_path(path):
             return
 
-        def accuracy():
+        def thread_func():
             dataset = DatasetService.load(self.network, path)
-            (roc_auc, files_count, drop_count) = ModelService.accuracy(
-                self.network, dataset)
+            metrics = ModelService.metrics(self.network, dataset)
+
             show_info(
-                f"ROG AUC модели: {(roc_auc * 100):.3f}%\n\nКоличество ошибочных распознавания {drop_count} из {files_count}"
+                f"ROG AUC модели: {(metrics['roc_auc'] * 100):.3f}%\n\
+                Accuracy модели: {metrics['roc_auc'] }%\n\
+                Precision модели: {metrics['precision']}%\n\
+                Recall модели: {metrics['recall']}%\n\n\
+                Количество ошибочных распознавания {metrics['drop_count']} из {metrics['files_count']}"
+            )
+
+            roc_auc_plot(
+                metrics['fpr'],
+                metrics['tpr'],
+                metrics['roc_auc_curve']
+            )
+
+            confusion_matrix_plot(
+                metrics['confusion_matrix'], 
+                metrics['labels']
             )
 
         try:
-            thread = Thread(target=accuracy)
+            thread = Thread(target=thread_func)
             thread.start()
         except:
             show_error()
@@ -135,7 +151,7 @@ class Comands():
         if not check_path(path):
             return
 
-        def generate():
+        def thread_func():
             path_to_dataset = DatasetService.generate(
                 path,
                 self.autograph,
@@ -153,7 +169,7 @@ class Comands():
             show_info("Датасет загружен!")
 
         try:
-            thread = Thread(target=generate)
+            thread = Thread(target=thread_func)
             thread.start()
             show_info("Датасет генерируется...")
         except:
