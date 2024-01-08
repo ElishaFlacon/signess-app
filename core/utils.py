@@ -1,4 +1,5 @@
 import csv
+import sklearn.metrics as sm
 import tkinter.messagebox as tkMb
 from matplotlib import pyplot as plt
 from signess.dataset import Dataset
@@ -61,4 +62,13 @@ def roc_auc_plot(fpr, tpr, roc_auc):
     plt.ylabel('True Positive Rate')
     plt.title('Пример ROC-кривой')
     plt.legend(loc="lower right")
+    plt.show()
+
+
+def confusion_matrix_plot(confusion_matrix, labels):
+    display = sm.ConfusionMatrixDisplay(
+        confusion_matrix=confusion_matrix,
+        display_labels=labels
+    )
+    display.plot()
     plt.show()
