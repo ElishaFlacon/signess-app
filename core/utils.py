@@ -44,25 +44,27 @@ def show_error(message="Произошла критическая ошибка!"
     tkMb.showerror("Ошибка!", message)
 
 
-def show_info(message="Отлично!"):
-    tkMb.showinfo("Информация", message)
+def show_info(message="Отлично!", title="Информация"):
+    tkMb.showinfo(title, message)
 
 
-def roc_auc_plot(fpr, tpr, roc_auc):
-    plt.plot(
-        fpr,
-        tpr,
-        color='darkorange',
-        label=f'ROC кривая (area = {roc_auc:.2f})'
-    )
-    plt.plot([0, 1], [0, 1], color='navy', linestyle='--')
-    plt.xlim([0.0, 1.0])
-    plt.ylim([0.0, 1.05])
-    plt.xlabel('False Positive Rate')
-    plt.ylabel('True Positive Rate')
-    plt.title('Пример ROC-кривой')
-    plt.legend(loc="lower right")
-    plt.show()
+def roc_auc_plot(fpr, tpr, roc_auc, n_labels):
+    for i in range(n_labels):
+        plt.figure()
+        plt.plot(
+            fpr[i],
+            tpr[i],
+            color='darkorange',
+            label=f'ROC кривая (area = {roc_auc[i]:.2f})'
+        )
+        plt.plot([0, 1], [0, 1], color='navy', linestyle='--')
+        plt.xlim([0.0, 1.0])
+        plt.ylim([0.0, 1.05])
+        plt.xlabel('False Positive Rate')
+        plt.ylabel('True Positive Rate')
+        plt.title(f'ROC кривая для класса: {i}')
+        plt.legend(loc="lower right")
+        plt.show()
 
 
 def confusion_matrix_plot(confusion_matrix, labels):
