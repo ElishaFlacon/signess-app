@@ -57,7 +57,7 @@ class Comands():
                 foreground="lime"
             )
             show_info(
-                f"Модель обучена!\nВремя обучения модели {time.time() - start_time:.3f} секунд")
+                f"Модель обучена!\nВремя обучения модели: {(time.time() - start_time)/60:.2f} минут")
 
         try:
             self.label_model.configure(
@@ -100,21 +100,19 @@ class Comands():
             metrics = ModelService.metrics(self.network, dataset)
 
             show_info(
-                f"ROG AUC модели: {(metrics['roc_auc'] * 100):.3f}%\n\
-                Accuracy модели: {metrics['roc_auc'] }%\n\
-                Precision модели: {metrics['precision']}%\n\
-                Recall модели: {metrics['recall']}%\n\n\
-                Количество ошибочных распознавания {metrics['drop_count']} из {metrics['files_count']}"
+                f"ROG AUC модели: {(metrics['roc_auc'] * 100):.3f}%\nAccuracy модели: {metrics['roc_auc']:.3f}%\nPrecision модели: {metrics['precision']:.3f}%\nRecall модели: {metrics['recall']:.3f}%\n\nКоличество ошибочных распознавания {metrics['drop_count']} из {metrics['files_count']}",
+                "Метрики модели"
             )
 
-            roc_auc_plot(
-                metrics['fpr'],
-                metrics['tpr'],
-                metrics['roc_auc_curve']
-            )
+            # roc_auc_plot(
+            #     metrics['fpr'],
+            #     metrics['tpr'],
+            #     metrics['roc_auc_curve'],
+            #     metrics['n_labels']
+            # )
 
             confusion_matrix_plot(
-                metrics['confusion_matrix'], 
+                metrics['confusion_matrix'],
                 metrics['labels']
             )
 
