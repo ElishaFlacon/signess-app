@@ -1,5 +1,6 @@
 import numpy
 import sklearn.metrics as sm
+from sklearn.preprocessing import label_binarize
 from core.utils import csv_to_array
 
 
@@ -21,11 +22,13 @@ class ModelService():
         predicts_list = predicts.predict.tolist()
 
         labels = dataset.class_labels
+        n_labels = len(labels.tolist())
 
         y_true = dataset.target
         y_pred = []
         for predict in predicts_list:
-            y = predict.index(max(predict))
+            y_index = predict.index(max(predict))
+            y = labels[y_index]
             y_pred.append(str(y))
 
         accuracy = sm.accuracy_score(
@@ -53,11 +56,13 @@ class ModelService():
             multi_class="ovo"
         )
 
-        fpr, tpr, _ = sm.roc_curve(
-            y_true=y_true,
-            y_score=predicts_list
-        )
-        roc_auc_curve = sm.auc(fpr, tpr)
+        # fpr, tpr, roc_auc_curve = dict(), dict(), dict()
+        # for i in range(n_labels):
+        #     fpr[i], tpr[i], _ = sm.roc_curve(
+        #         y_true=y_true[i],
+        #         y_score=predicts_list[i]
+        #     )
+        #     roc_auc[i] = sm.auc(fpr[i], tpr[i])
 
         confusion_matrix = sm.confusion_matrix(
             y_true=y_true,
@@ -73,8 +78,8 @@ class ModelService():
         files_count = len(files)
 
         for i, predictArr in enumerate(predicts_list):
-            predictIndex = max(enumerate(predictArr), key=lambda x: x[1])[0]
-            predict = labels[predictIndex]
+            predict_index = max(enumerate(predictArr), key=lambda x: x[1])[0]
+            predict = labels[predict_index]
             target = y_true[i]
 
             if predict != target:
@@ -85,15 +90,16 @@ class ModelService():
                     )
 
         return {
-            roc_auc,
-            accuracy,
-            precision,
-            recall,
-            confusion_matrix,
-            roc_auc_curve,
-            fpr,
-            tpr,
-            files_count,
-            drop_count,
-            labels
+            "roc_auc": roc_auc,
+            "accuracy": accuracy,
+            "precision": precision,
+            "recall": recall,
+            "confusion_matrix": confusion_matrix,
+            # "roc_auc_curve": roc_auc_curve,
+            # "fpr": fpr,
+            # "tpr": tpr,
+            "files_count": files_count,
+            "drop_count": drop_count,
+            "labels": labels,
+            "n_labels": n_labels
         }
