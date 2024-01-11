@@ -100,7 +100,7 @@ class Comands():
             metrics = ModelService.metrics(self.network, dataset)
 
             show_info(
-                f"ROG AUC модели: {(metrics['roc_auc'] * 100):.3f}%\nAccuracy модели: {metrics['roc_auc']:.3f}%\nPrecision модели: {metrics['precision']:.3f}%\nRecall модели: {metrics['recall']:.3f}%\n\nКоличество ошибочных распознавания {metrics['drop_count']} из {metrics['files_count']}",
+                f"ROG AUC модели: {(metrics['roc_auc'] * 100):.3f}%\nAccuracy модели: {metrics['roc_auc']:.3f}%\nPrecision модели: {metrics['precision']:.3f}%\nRecall модели: {metrics['recall']:.3f}%\n\nКоличество ошибочных распознаваний: {metrics['drop_count']} из {metrics['files_count']}",
                 "Метрики модели"
             )
 
