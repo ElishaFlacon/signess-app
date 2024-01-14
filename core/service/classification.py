@@ -4,7 +4,7 @@ from core.utils import csv_to_array
 
 
 class ClassificationService():
-    def classificate(network, autograph, path_to_dataset, path_to_picture, path_to_csv="./result/persons.csv"):
+    def classificate(self, network, autograph, path_to_dataset, path_to_picture, path_to_csv="./result/persons.csv"):
         temp_path = "./temp.png"
 
         picture = autograph.get_clear_autograph(path_to_picture)
