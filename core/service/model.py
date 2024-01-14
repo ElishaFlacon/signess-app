@@ -1,23 +1,28 @@
 import numpy
 import sklearn.metrics as sm
-# from sklearn.preprocessing import label_binarize
+from sklearn.preprocessing import label_binarize
 from core.utils import csv_to_array
 
 
 class ModelService():
-    def load(self, network, path):
+    @staticmethod
+    def load(network, path):
         network.load(path)
 
-    def save(self,network, path):
+    @staticmethod
+    def save(network, path):
         network.save(f"{path}/model")
 
-    def train(self,network, dataset, epochs):
+    @staticmethod
+    def train(network, dataset, epochs):
         network.train(dataset, epochs)
 
-    def blunt(self,network):
+    @staticmethod
+    def blunt(network):
         network.blunt()
 
-    def metrics(self,network, dataset):
+    @staticmethod
+    def metrics(network, dataset):
         predicts = network.predict(dataset)
         predicts_list = predicts.predict.tolist()
 
