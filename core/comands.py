@@ -57,7 +57,7 @@ class Comands():
                 foreground="lime"
             )
             show_info(
-                f"Модель обучена!\nВремя обучения модели: {(time.time() - start_time)/60:.2f} минут")
+                f"Модель обучена!\nВремя обучения модели: {(time.time() - start_time)/60:.1f} минут")
 
         try:
             self.label_model.configure(
@@ -100,7 +100,7 @@ class Comands():
             metrics = ModelService.metrics(self.network, dataset)
 
             show_info(
-                f"ROG AUC модели: {(metrics['roc_auc'] * 100):.3f}%\nAccuracy модели: {metrics['roc_auc']:.3f}%\nPrecision модели: {metrics['precision']:.3f}%\nRecall модели: {metrics['recall']:.3f}%\n\nКоличество ошибочных распознаваний: {metrics['drop_count']} из {metrics['files_count']}",
+                f"ROG AUC модели: {(metrics['roc_auc'] * 100):.1f}%\nAccuracy модели: {metrics['roc_auc']:.1f}%\nPrecision модели: {metrics['precision']:.1f}%\nRecall модели: {metrics['recall']:.1f}%\n\nКоличество ошибочных распознаваний: {metrics['drop_count']} из {metrics['files_count']}",
                 "Метрики модели"
             )
 
