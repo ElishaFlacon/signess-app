@@ -9,3 +9,5 @@ model
 
 *.dev.*
 *.dev
+
+drops.csv
