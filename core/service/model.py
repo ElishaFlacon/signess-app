@@ -1,6 +1,6 @@
 import numpy
 import sklearn.metrics as sm
-from sklearn.preprocessing import label_binarize
+# from sklearn.preprocessing import label_binarize
 from core.utils import csv_to_array
 
 
@@ -55,6 +55,18 @@ class ModelService():
             average="micro"
         )
 
+        fscore = sm.f1_score(
+            y_true=y_true,
+            y_pred=y_pred,
+            labels=labels,
+            average="micro"
+        )
+
+        # prc = sm.precision_recall_curve(
+        #     y_true=y_true,
+        #     probas_pred=y_pred
+        # )
+
         roc_auc = sm.roc_auc_score(
             y_true=y_true,
             y_score=predicts_list,
@@ -103,6 +115,8 @@ class ModelService():
             # "roc_auc_curve": roc_auc_curve,
             # "fpr": fpr,
             # "tpr": tpr,
+            "prc": 0,
+            "fscore": fscore,
             "files_count": files_count,
             "drop_count": drop_count,
             "labels": labels,
